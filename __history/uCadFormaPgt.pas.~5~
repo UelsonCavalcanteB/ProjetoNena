@@ -1,0 +1,72 @@
+unit uCadFormaPgt;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadForm, Data.DB, System.ImageList,
+  Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Buttons, Vcl.ToolWin, Vcl.DBCtrls, Vcl.Mask, System.Actions, Vcl.ActnList;
+
+type
+  TfmCadFormaPgt = class(TfmForm)
+    Label3: TLabel;
+    DBEdit1: TDBEdit;
+    Label4: TLabel;
+    DBEdit2: TDBEdit;
+    DBCheckBox1: TDBCheckBox;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btSairClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure DBEdit2Exit(Sender: TObject);
+    procedure Action1Execute(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmCadFormaPgt: TfmCadFormaPgt;
+
+implementation
+
+{$R *.dfm}
+Uses udm;
+
+procedure TfmCadFormaPgt.Action1Execute(Sender: TObject);
+begin
+ // inherited;
+ FreeAndNil(fmCadFormaPgt);
+end;
+
+procedure TfmCadFormaPgt.btSairClick(Sender: TObject);
+begin
+ // inherited;
+  FreeAndNil(fmCadFormaPgt);
+end;
+
+procedure TfmCadFormaPgt.DBEdit2Exit(Sender: TObject);
+begin
+  inherited;
+  if dm.ib_fpg.State in [dsInsert] then
+    dm.ib_fpg.Open;
+    dm.ib_fpg.Post;
+    dm.IBTransaction1.Commit;
+
+end;
+
+procedure TfmCadFormaPgt.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+ // inherited;
+  dm.ib_fpg.Close;
+  FreeAndNil(fmCadFormaPgt);
+end;
+
+procedure TfmCadFormaPgt.FormCreate(Sender: TObject);
+begin
+  inherited;
+  dm.ib_fpg.Open;
+end;
+
+end.

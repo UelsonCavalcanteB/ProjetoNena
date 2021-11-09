@@ -1,0 +1,178 @@
+unit uCadEmpresa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ToolWin,
+  System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask,
+  Vcl.ExtCtrls;
+
+type
+  TfmCadEmpresa = class(TForm)
+    ImageList1: TImageList;
+    ToolBar1: TToolBar;
+    btNovo: TToolButton;
+    ToolButton2: TToolButton;
+    btEditar: TToolButton;
+    ToolButton4: TToolButton;
+    btExcluir: TToolButton;
+    ToolButton6: TToolButton;
+    btSalvar: TToolButton;
+    ToolButton8: TToolButton;
+    btImp: TToolButton;
+    ToolButton10: TToolButton;
+    btSair: TToolButton;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    DBEdit3: TDBEdit;
+    Label5: TLabel;
+    DBEdit4: TDBEdit;
+    Label6: TLabel;
+    DBEdit5: TDBEdit;
+    Label7: TLabel;
+    DBEdit6: TDBEdit;
+    Label8: TLabel;
+    DBEdit7: TDBEdit;
+    Label9: TLabel;
+    DBEdit8: TDBEdit;
+    Label10: TLabel;
+    DBComboBox1: TDBComboBox;
+    Label11: TLabel;
+    DBEdit9: TDBEdit;
+    Label12: TLabel;
+    DBEdit10: TDBEdit;
+    Label13: TLabel;
+    DBEdit11: TDBEdit;
+    Label14: TLabel;
+    DBEdit12: TDBEdit;
+    Label15: TLabel;
+    DBEdit13: TDBEdit;
+    Panel1: TPanel;
+    PageControl2: TPageControl;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    Label16: TLabel;
+    DBEdit14: TDBEdit;
+    Label17: TLabel;
+    DBEdit15: TDBEdit;
+    Label18: TLabel;
+    DBEdit16: TDBEdit;
+    Label19: TLabel;
+    DBEdit17: TDBEdit;
+    Label20: TLabel;
+    DBEdit18: TDBEdit;
+    Label21: TLabel;
+    DBEdit19: TDBEdit;
+    Label22: TLabel;
+    DBEdit20: TDBEdit;
+    Label23: TLabel;
+    DBEdit21: TDBEdit;
+    Label24: TLabel;
+    DBEdit22: TDBEdit;
+    Label25: TLabel;
+    DBMemo1: TDBMemo;
+    Label26: TLabel;
+    DBEdit23: TDBEdit;
+    Label27: TLabel;
+    DBEdit24: TDBEdit;
+    Label28: TLabel;
+    DBEdit25: TDBEdit;
+    Label29: TLabel;
+    DBEdit26: TDBEdit;
+    Label30: TLabel;
+    DBEdit27: TDBEdit;
+    Label31: TLabel;
+    DBEdit28: TDBEdit;
+    Label32: TLabel;
+    DBEdit29: TDBEdit;
+    Label33: TLabel;
+    DBEdit30: TDBEdit;
+    Label34: TLabel;
+    DBEdit31: TDBEdit;
+    Label35: TLabel;
+    DBEdit32: TDBEdit;
+    Label36: TLabel;
+    DBEdit33: TDBEdit;
+    Label37: TLabel;
+    DBEdit34: TDBEdit;
+    Label38: TLabel;
+    DBEdit35: TDBEdit;
+    Label39: TLabel;
+    DBEdit36: TDBEdit;
+    Label40: TLabel;
+    DBEdit37: TDBEdit;
+    Label41: TLabel;
+    DBEdit38: TDBEdit;
+    Label42: TLabel;
+    DBEdit39: TDBEdit;
+    Label43: TLabel;
+    DBEdit40: TDBEdit;
+    Label44: TLabel;
+    DBEdit41: TDBEdit;
+    Label45: TLabel;
+    DBEdit42: TDBEdit;
+    Label47: TLabel;
+    DBMemo2: TDBMemo;
+    TabSheet5: TTabSheet;
+    TabSheet6: TTabSheet;
+    Label46: TLabel;
+    DBEdit43: TDBEdit;
+    Label48: TLabel;
+    DBEdit44: TDBEdit;
+    Label49: TLabel;
+    DBEdit45: TDBEdit;
+    Label50: TLabel;
+    DBEdit46: TDBEdit;
+    Label51: TLabel;
+    DBEdit47: TDBEdit;
+    Label52: TLabel;
+    DBEdit48: TDBEdit;
+    Label53: TLabel;
+    DBEdit49: TDBEdit;
+    Label54: TLabel;
+    DBEdit50: TDBEdit;
+    Label55: TLabel;
+    DBEdit51: TDBEdit;
+    Label56: TLabel;
+    DBEdit52: TDBEdit;
+    Label57: TLabel;
+    DBEdit53: TDBEdit;
+    Label58: TLabel;
+    DBEdit54: TDBEdit;
+    Label59: TLabel;
+    DBEdit55: TDBEdit;
+    procedure btSairClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmCadEmpresa: TfmCadEmpresa;
+
+implementation
+
+{$R *.dfm}
+Uses uDm;
+
+procedure TfmCadEmpresa.btSairClick(Sender: TObject);
+begin
+  freeandNil(fmCadEmpresa);
+end;
+
+procedure TfmCadEmpresa.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := cafree;
+end;
+
+end.

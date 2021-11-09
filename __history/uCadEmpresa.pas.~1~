@@ -1,0 +1,38 @@
+unit uCadEmpresa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ToolWin,
+  System.ImageList, Vcl.ImgList;
+
+type
+  TForm1 = class(TForm)
+    ImageList1: TImageList;
+    ToolBar1: TToolBar;
+    btNovo: TToolButton;
+    ToolButton2: TToolButton;
+    btEditar: TToolButton;
+    ToolButton4: TToolButton;
+    btExcluir: TToolButton;
+    ToolButton6: TToolButton;
+    btSalvar: TToolButton;
+    ToolButton8: TToolButton;
+    btImp: TToolButton;
+    ToolButton10: TToolButton;
+    btSair: TToolButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+end.

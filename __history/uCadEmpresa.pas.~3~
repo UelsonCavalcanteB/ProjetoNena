@@ -1,0 +1,61 @@
+unit uCadEmpresa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ToolWin,
+  System.ImageList, Vcl.ImgList, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask;
+
+type
+  TfmCadEmpresa = class(TForm)
+    ImageList1: TImageList;
+    ToolBar1: TToolBar;
+    btNovo: TToolButton;
+    ToolButton2: TToolButton;
+    btEditar: TToolButton;
+    ToolButton4: TToolButton;
+    btExcluir: TToolButton;
+    ToolButton6: TToolButton;
+    btSalvar: TToolButton;
+    ToolButton8: TToolButton;
+    btImp: TToolButton;
+    ToolButton10: TToolButton;
+    btSair: TToolButton;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    DBEdit3: TDBEdit;
+    Label5: TLabel;
+    DBEdit4: TDBEdit;
+    Label6: TLabel;
+    DBEdit5: TDBEdit;
+    Label7: TLabel;
+    DBEdit6: TDBEdit;
+    Label8: TLabel;
+    DBEdit7: TDBEdit;
+    Label9: TLabel;
+    DBEdit8: TDBEdit;
+    Label10: TLabel;
+    DBComboBox1: TDBComboBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmCadEmpresa: TfmCadEmpresa;
+
+implementation
+
+{$R *.dfm}
+Uses uDm;
+
+end.

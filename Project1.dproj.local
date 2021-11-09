@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2021/08/12 21:29:51.000.162,=C:\Users\MINAS\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2021/08/12 21:30:18.000.405,C:\Users\MINAS\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\NenaModas\uPrincipal.pas</Transaction>
+    <Transaction>2021/08/12 21:30:18.000.405,C:\Users\MINAS\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\NenaModas\uPrincipal.dfm</Transaction>
+    <Transaction>2021/08/12 21:30:34.000.494,C:\Users\MINAS\Documents\Embarcadero\Studio\Projects\Project2.dproj=C:\NenaModas\Project1.dproj</Transaction>
+    <Transaction>2021/08/12 21:32:44.000.144,=C:\NenaModas\uCadCliente.pas</Transaction>
+    <Transaction>2021/08/12 21:32:44.000.365,=C:\NenaModas\uCadEndereco.pas</Transaction>
+    <Transaction>2021/08/12 21:32:44.000.747,=C:\NenaModas\uCadFornecedor.pas</Transaction>
+    <Transaction>2021/08/12 21:32:44.000.535,=C:\NenaModas\uCadForm.pas</Transaction>
+    <Transaction>2021/08/12 21:32:45.000.078,=C:\NenaModas\uCadFuncionario.pas</Transaction>
+    <Transaction>2021/08/12 21:33:21.000.664,=C:\NenaModas\uDm.pas</Transaction>
+    <Transaction>2021/08/12 21:34:24.000.019,=C:\NenaModas\Classes\uClasseGeral.pas</Transaction>
+    <Transaction>2021/08/12 21:34:45.000.571,C:\NenaModas\uCadCliente.pas=</Transaction>
+    <Transaction>2021/08/12 21:58:41.000.952,=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/08/12 21:59:08.000.450,C:\NenaModas\Unit1.dfm=C:\NenaModas\uCadCliente.dfm</Transaction>
+    <Transaction>2021/08/12 21:59:08.000.450,C:\NenaModas\Unit1.pas=C:\NenaModas\uCadCliente.pas</Transaction>
+    <Transaction>2021/08/13 10:53:15.000.067,=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/08/13 10:53:57.000.322,C:\NenaModas\uCadProduto.dfm=C:\NenaModas\Unit1.dfm</Transaction>
+    <Transaction>2021/08/13 10:53:57.000.322,C:\NenaModas\uCadProduto.pas=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/08/13 11:49:06.000.974,=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/08/13 11:49:33.000.164,C:\NenaModas\uCadGrupo.pas=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/08/13 11:49:33.000.164,C:\NenaModas\uCadGrupo.dfm=C:\NenaModas\Unit1.dfm</Transaction>
+    <Transaction>2021/08/13 14:46:15.000.783,=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/08/13 14:48:56.000.542,C:\NenaModas\Unit1.dfm=C:\NenaModas\uCadMarca.dfm</Transaction>
+    <Transaction>2021/08/13 14:48:56.000.542,C:\NenaModas\Unit1.pas=C:\NenaModas\uCadMarca.pas</Transaction>
+    <Transaction>2021/08/16 10:32:09.000.187,=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/08/16 10:33:33.000.582,C:\NenaModas\uCadEmpresa.pas=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/08/16 10:33:33.000.582,C:\NenaModas\uCadEmpresa.dfm=C:\NenaModas\Unit1.dfm</Transaction>
+    <Transaction>2021/08/18 10:42:11.000.574,=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/08/18 11:14:37.000.798,C:\NenaModas\Unit1.pas=C:\NenaModas\uCadFormaPgt.pas</Transaction>
+    <Transaction>2021/08/18 11:14:37.000.798,C:\NenaModas\Unit1.dfm=C:\NenaModas\uCadFormaPgt.dfm</Transaction>
+    <Transaction>2021/08/19 10:02:03.000.718,=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/08/19 10:02:27.000.240,C:\NenaModas\uCadLogin.pas=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/08/19 10:02:27.000.240,C:\NenaModas\uCadLogin.dfm=C:\NenaModas\Unit1.dfm</Transaction>
+    <Transaction>2021/08/19 21:04:46.000.662,=C:\NenaModas\ModelSupport_Project1\default.txaPackage</Transaction>
+    <Transaction>2021/08/20 21:02:47.000.243,=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/08/20 21:03:18.000.942,C:\NenaModas\Classes\uValidaCpf.pas=C:\NenaModas\Unit1.pas</Transaction>
+    <Transaction>2021/09/01 17:31:44.000.316,=C:\NenaModas\uCadCnpj.pas</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,352 @@
+unit uDm;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DBXFirebird, Data.FMTBcd, Data.DB,
+  Datasnap.Provider, Data.SqlExpr, Datasnap.DBClient, IBX.IBCustomDataSet,
+  IBX.IBQuery, IBX.IBDatabase;
+
+type
+  Tdm = class(TDataModule)
+    Conexao: TIBDatabase;
+    IBTransaction1: TIBTransaction;
+    sqlPesPedido: TIBQuery;
+    dsPesPedido: TDataSource;
+    sqlPesPedidoIDPEDIDO: TIntegerField;
+    sqlPesPedidoNOME: TIBStringField;
+    sqlPesPedidoIDPRODUTO: TIntegerField;
+    sqlPesPedidoDESCRICAO: TIBStringField;
+    sqlPesPedidoQTDE: TIBBCDField;
+    sqlPesPedidoVALOR: TIBBCDField;
+    sqlPesPedidoTOTAL: TIBBCDField;
+    sqlPesPedidoTOTAL1: TIBBCDField;
+    sqlPesPedidoDATAPEDIDO: TDateField;
+    Ib_Fornecedor: TIBDataSet;
+    Ib_FornecedorID: TIntegerField;
+    Ib_FornecedorNOME: TIBStringField;
+    Ib_FornecedorNOME_FANTASIA: TIBStringField;
+    Ib_FornecedorCPF_CNPJ: TIBStringField;
+    Ib_FornecedorINSCRICAO_ESTADUAL_RG: TIBStringField;
+    Ib_FornecedorLOGRADOURO: TIBStringField;
+    Ib_FornecedorNUMERO: TIBStringField;
+    Ib_FornecedorCOMPLEMENTO: TIBStringField;
+    Ib_FornecedorBAIRRO: TIBStringField;
+    Ib_FornecedorCOD_CIDADE: TIntegerField;
+    Ib_FornecedorUF: TIBStringField;
+    Ib_FornecedorCEP: TIBStringField;
+    Ib_FornecedorTELEFONE1: TIBStringField;
+    Ib_FornecedorTELEFONE2: TIBStringField;
+    Ib_FornecedorCELULAR: TIBStringField;
+    Ib_FornecedorLIMITE_CREDITO: TIBBCDField;
+    Ib_FornecedorEMAIL: TIntegerField;
+    Ib_FornecedorOBSERVACAO: TIBStringField;
+    Ib_FornecedorCOD_USUARIO_INCLUSAO: TIBStringField;
+    Ib_FornecedorCOD_USUARIO_ALTERACAO: TIBStringField;
+    Ib_FornecedorDATA_INCLUSAO: TDateField;
+    Ib_FornecedorDATA_ALTERACAO: TDateField;
+    Ib_FornecedorIE_MUNICIPAL: TIBStringField;
+    Ib_FornecedorDS_EMAIL: TIBStringField;
+    IB_Cliente: TIBDataSet;
+    IB_Produto: TIBDataSet;
+    Ds_Produto: TDataSource;
+    IB_ClienteID: TIntegerField;
+    IB_ClienteNOME: TIBStringField;
+    IB_ClienteCADASTRO: TDateField;
+    IB_ClienteCPF: TIBStringField;
+    IB_ClienteRG: TIBStringField;
+    IB_ClienteDATA_NASCIMENTO: TDateField;
+    IB_ClienteEMAIL: TIBStringField;
+    IB_ClienteNOME_PAI: TIBStringField;
+    IB_ClienteNOME_MAE: TIBStringField;
+    IB_ClienteTIPO: TIBStringField;
+    IB_ClienteINATIVO: TIBStringField;
+    IB_ClienteEMAIL2: TIBStringField;
+    IB_ClienteX: TIBStringField;
+    IB_ClienteTELEFONE: TIBStringField;
+    IB_ClienteTEL_RECADO: TIBStringField;
+    IB_ClienteCELULAR: TIBStringField;
+    IB_ClienteLIMITECREDITO: TIBBCDField;
+    Ib_Endereco: TIBDataSet;
+    Ds_endereco: TDataSource;
+    Ib_EnderecoID: TIntegerField;
+    Ib_EnderecoRUA: TIBStringField;
+    Ib_EnderecoNUMERO: TIntegerField;
+    Ib_EnderecoCEP: TIBStringField;
+    Ib_EnderecoLOGRADOURO: TIBStringField;
+    Ib_EnderecoBAIRRO: TIBStringField;
+    Ib_EnderecoCIDADE: TIBStringField;
+    Ib_EnderecoUF: TIBStringField;
+    Ib_EnderecoIDCLIENTE: TIntegerField;
+    Ib_EnderecoIDFUNCIONARIO: TIntegerField;
+    Ib_EnderecoIDFORNECEDOR: TIntegerField;
+    qPes: TIBQuery;
+    dsPesq: TDataSource;
+    Ib_EnderecoEX: TIBStringField;
+    ib_Funcionario: TIBDataSet;
+    ib_FuncionarioID: TIntegerField;
+    ib_FuncionarioNOME: TIBStringField;
+    ib_FuncionarioCPF: TIBStringField;
+    ib_FuncionarioRG: TIBStringField;
+    ib_FuncionarioDATA_NASCIMENTO: TDateField;
+    ib_FuncionarioTELEFONE: TIBStringField;
+    ib_FuncionarioCELULAR: TIBStringField;
+    ib_FuncionarioNOME_MAE: TIBStringField;
+    ib_FuncionarioNOME_PAI: TIBStringField;
+    ib_FuncionarioCNH_TIPO: TIBStringField;
+    ib_FuncionarioREGISTRO_CNH: TIBStringField;
+    ib_FuncionarioDATA_CNH: TDateField;
+    ib_FuncionarioDATAVALIDADE_CNH: TDateField;
+    ib_FuncionarioCADASTRO: TDateField;
+    ib_FuncionarioDATA_INATIVADO: TDateField;
+    ib_FuncionarioCARTEIRA_IDENTIFICACAO: TIntegerField;
+    ib_FuncionarioCARTEIRA_NUMERO: TIntegerField;
+    ib_FuncionarioCARTEIRA_SERIE: TIntegerField;
+    ib_FuncionarioCARTEIRA_UF: TIBStringField;
+    ib_FuncionarioUSUARIO: TIBStringField;
+    ib_FuncionarioSENHA: TIntegerField;
+    ib_FuncionarioATIVO: TIBStringField;
+    ib_FuncionarioEMAIL: TIBStringField;
+    ib_FuncionarioEX: TIBStringField;
+    qUp: TIBQuery;
+    dsUp: TDataSource;
+    Ib_FornecedorEX: TIBStringField;
+    Ib_FornecedorATIVO: TIBStringField;
+    IB_ProdutoID: TIBStringField;
+    IB_ProdutoCODBARRA: TIBStringField;
+    IB_ProdutoNOME: TIBStringField;
+    IB_ProdutoNOME_REDUZIDO: TIBStringField;
+    IB_ProdutoUNIDADE: TIBStringField;
+    IB_ProdutoDATA_CADASTRO: TDateField;
+    IB_ProdutoIDGRUPO: TIntegerField;
+    IB_ProdutoIDFORNECEDOR: TIntegerField;
+    IB_ProdutoIDMARCA: TIntegerField;
+    IB_ProdutoULTIMACOMPRA: TDateField;
+    IB_ProdutoPRECOCUSTO: TIBBCDField;
+    IB_ProdutoPRECOVENDA: TIBBCDField;
+    IB_ProdutoULTIMAVENDA: TDateField;
+    IB_ProdutoESTOQUE: TIBBCDField;
+    IB_ProdutoESTOQUEMINIMO: TIBBCDField;
+    IB_ProdutoPROMOCAO: TIBStringField;
+    IB_ProdutoINI_PROMOCAO: TDateField;
+    IB_ProdutoFIM_PROMOCAO: TDateField;
+    IB_ProdutoPESO: TIBBCDField;
+    IB_ProdutoCOMISSAO: TIBBCDField;
+    IB_ProdutoFOTO: TIBStringField;
+    IB_ProdutoULTIMACOMPRA_ANTERIOR: TDateField;
+    IB_ProdutoPRECOCUSTO_ANTERIOR: TIBBCDField;
+    IB_ProdutoPRECOVENDA_ANTERIOR: TIBBCDField;
+    IB_ProdutoCUSTOMEDIO: TIBBCDField;
+    IB_ProdutoDATA_REMARCACAO_CUSTO: TDateField;
+    IB_ProdutoDATA_REMARCACAO_VENDA: TDateField;
+    IB_ProdutoPRECO_PROMOCAO: TIBBCDField;
+    IB_ProdutoDATA_PROMOCAO: TDateField;
+    IB_ProdutoGERA_ETQ_CODBAR: TIBStringField;
+    IB_ProdutoCST: TIBStringField;
+    IB_ProdutoCLASSIFICACAO_FISCAL: TIBStringField;
+    IB_ProdutoNBM: TIBStringField;
+    IB_ProdutoNCM: TIBStringField;
+    IB_ProdutoPER_ALIQUOTA: TIBBCDField;
+    IB_ProdutoPERC_IPI: TIBBCDField;
+    IB_ProdutoPERC_REDUCAO: TIBBCDField;
+    IB_ProdutoULTIMA_ALTERACAO: TDateField;
+    IB_ProdutoPRECOVENDA_NOVO: TIBBCDField;
+    IB_ProdutoDESCONTO_PRECOVENDA: TIBBCDField;
+    IB_ProdutoPISCOFINS: TIBStringField;
+    IB_ProdutoREFERENCIA_FORNECEDOR: TIBStringField;
+    IB_ProdutoMARGEM_DESCONTO: TIBBCDField;
+    IB_ProdutoTAMANHO: TIBStringField;
+    IB_ProdutoULTIMA_COMPRA: TDateField;
+    IB_ProdutoREFERENCIA: TIBStringField;
+    IB_ProdutoSITUACAO_TRIBUTARIA: TIBStringField;
+    IB_ProdutoFLAG_SIS: TIBStringField;
+    IB_ProdutoFLAG_ACEITO: TIBStringField;
+    IB_ProdutoFLAG_EST: TIBStringField;
+    IB_ProdutoCSOSN: TIBStringField;
+    IB_ProdutoMARKUP: TIBBCDField;
+    IB_ProdutoCOD_ORIGINAL: TIBStringField;
+    IB_ProdutoGT: TIBStringField;
+    IB_ProdutoOBS: TBlobField;
+    ib_grupo: TIBDataSet;
+    Ds_grupo: TDataSource;
+    ib_grupoID: TIntegerField;
+    ib_grupoDESCRICAO: TIBStringField;
+    ib_grupoMARKUP: TIBBCDField;
+    ib_grupoEX: TIBStringField;
+    ib_grupoATIVO: TIBStringField;
+    ib_marca: TIBDataSet;
+    Ds_marca: TDataSource;
+    ib_marcaID: TIntegerField;
+    ib_marcaDESCRICAO: TIBStringField;
+    ib_marcaATIVO: TIBStringField;
+    ib_marcaEX: TIBStringField;
+    IB_ClienteIDUSUARIO: TIntegerField;
+    IB_ProdutoIDUSUARIO: TIntegerField;
+    Ib_EnderecoIDUSUARIO: TIntegerField;
+    ib_FuncionarioIDUSUARIO: TIntegerField;
+    ib_grupoIDUSUARIO: TIntegerField;
+    ib_marcaIDUSUARIO: TIntegerField;
+    ds_empresa: TDataSource;
+    ib_empresa: TIBDataSet;
+    ib_empresaID: TIntegerField;
+    ib_empresaRAZAO: TIBStringField;
+    ib_empresaFANTASIA: TIBStringField;
+    ib_empresaEND_EMPRESA: TIBStringField;
+    ib_empresaNUMERO: TIBStringField;
+    ib_empresaBAIRRO: TIBStringField;
+    ib_empresaCOMPLEMENTO: TIBStringField;
+    ib_empresaCIDADE: TIBStringField;
+    ib_empresaUF: TIBStringField;
+    ib_empresaCEP: TIBStringField;
+    ib_empresaFONE: TIBStringField;
+    ib_empresaFONE2: TIBStringField;
+    ib_empresaFONE3: TIBStringField;
+    ib_empresaFAX: TIBStringField;
+    ib_empresaEMAIL: TIBStringField;
+    ib_empresaWEB: TIBStringField;
+    ib_empresaCNPJ: TIBStringField;
+    ib_empresaIE: TIBStringField;
+    ib_empresaIM: TIBStringField;
+    ib_empresaLOGO: TIBStringField;
+    ib_empresaPIS: TIBBCDField;
+    ib_empresaIRRF: TIBBCDField;
+    ib_empresaCNAE: TIntegerField;
+    ib_empresaISS: TIBBCDField;
+    ib_empresaREGIME_TRIBUTARIO: TIBStringField;
+    ib_empresaOBSERV1: TIBStringField;
+    ib_empresaOBSERV2: TIBStringField;
+    ib_empresaCOFINS: TIBBCDField;
+    ib_empresaCPMF: TIBBCDField;
+    ib_empresaLUCROLIQUIDO: TIBBCDField;
+    ib_empresaALIQ_ICM_SUPER_SIMPLES: TIBBCDField;
+    ib_empresaCARGA: TIntegerField;
+    ib_empresaULTIMO_PG: TDateField;
+    ib_empresaICMS_SSIMPLES: TIBBCDField;
+    ib_empresaNFE_CERTIFICADO: TIBStringField;
+    ib_empresaDECIMAIS: TIntegerField;
+    ib_empresaSMTP_SERVER: TIBStringField;
+    ib_empresaSMTP_PORTA: TIntegerField;
+    ib_empresaSMTP_USER: TIBStringField;
+    ib_empresaSMTP_PASS: TIBStringField;
+    ib_empresaSMTP_EMAIL: TIBStringField;
+    ib_empresaSMTP_SERVER_SSL: TIBStringField;
+    ib_empresaSPED_DIR: TIBStringField;
+    ib_empresaCONTADOR_NOME: TIBStringField;
+    ib_empresaCONTADOR_CPF: TIBStringField;
+    ib_empresaCONTADOR_CRC: TIBStringField;
+    ib_empresaCONTADOR_CNPJ: TIBStringField;
+    ib_empresaCONTADOR_ENDE: TIBStringField;
+    ib_empresaCONTADOR_NMRO: TIBStringField;
+    ib_empresaCONTADOR_COMP: TIBStringField;
+    ib_empresaCONTADOR_BAIR: TIBStringField;
+    ib_empresaCONTADOR_NCEP: TIBStringField;
+    ib_empresaCONTADOR_CIDA: TIBStringField;
+    ib_empresaCONTADOR_ESTA: TIBStringField;
+    ib_empresaCONTADOR_FON1: TIBStringField;
+    ib_empresaCONTADOR_FON2: TIBStringField;
+    ib_empresaCONTADOR_MAIL: TIBStringField;
+    ib_empresaDAS_SSIMPLES: TIBBCDField;
+    ib_empresaLUCRO_PRESUMIDO_PERC: TIBBCDField;
+    ib_empresaSUFRAMA: TIBStringField;
+    ib_empresaUSUARIO_ALTERACAO: TIBStringField;
+    ib_empresaULTIMA_ALTERACAO: TDateField;
+    ib_empresaRAMO_ATIVIDADE_ID: TIntegerField;
+    ib_empresaMICRO_EMPRESA_ESTADUAL: TIBStringField;
+    ib_empresaSUBSTITUTO_TRIBUTARIO: TIBStringField;
+    ib_empresaCONTRIBUINTE_IPI: TIBStringField;
+    ib_empresaOPTANTE_SIMPLES: TIBStringField;
+    ib_empresaSUPER_SIMPLES: TIBStringField;
+    ib_empresaIPI: TIBBCDField;
+    ib_empresaPERMITE_CRED_ICMS: TIBStringField;
+    ib_empresaCOD_REGIME_TRIBUTARIO: TIntegerField;
+    ib_empresaINICIO_ATIVIDADE: TDateField;
+    ib_empresaMATRIZ: TIBStringField;
+    ib_empresaNUMERONOTAFISCAL: TIntegerField;
+    ib_empresaCODIGO_MUNICIPIO: TIBStringField;
+    ib_fpg: TIBDataSet;
+    dsfpg: TDataSource;
+    ib_fpgID: TIntegerField;
+    ib_fpgDESCRICAO: TIBStringField;
+    ib_fpgATIVO: TIBStringField;
+    ib_fpgEX: TIBStringField;
+    qLogin: TIBQuery;
+    dsLogin: TDataSource;
+    qLoginUSUARIO: TIBStringField;
+    qLoginSENHA: TIntegerField;
+    ibEndCliente: TIBDataSet;
+    ibEndClienteID: TIntegerField;
+    ibEndClienteRUA: TIBStringField;
+    ibEndClienteNUMERO: TIntegerField;
+    ibEndClienteCEP: TIBStringField;
+    ibEndClienteLOGRADOURO: TIBStringField;
+    ibEndClienteBAIRRO: TIBStringField;
+    ibEndClienteCIDADE: TIBStringField;
+    ibEndClienteUF: TIBStringField;
+    ibEndClienteIDCLIENTE: TIntegerField;
+    ibEndClienteEX: TIBStringField;
+    ibEndClienteIDUSUARIO: TIntegerField;
+    procedure IB_ClienteNewRecord(DataSet: TDataSet);
+    procedure ib_FuncionarioNewRecord(DataSet: TDataSet);
+    procedure ib_grupoNewRecord(DataSet: TDataSet);
+    procedure Ib_EnderecoNewRecord(DataSet: TDataSet);
+    procedure ib_marcaNewRecord(DataSet: TDataSet);
+    procedure ib_fpgNewRecord(DataSet: TDataSet);
+    procedure ibEndClienteNewRecord(DataSet: TDataSet);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dm: Tdm;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure Tdm.ibEndClienteNewRecord(DataSet: TDataSet);
+begin
+  ibEndClienteEX.Value := '0';
+
+end;
+
+procedure Tdm.IB_ClienteNewRecord(DataSet: TDataSet);
+begin
+  IB_ClienteINATIVO.Value := 'N';
+  IB_ClienteTIPO.Value    := 'F';
+  IB_ClienteX.Value       := '0';
+end;
+
+procedure Tdm.Ib_EnderecoNewRecord(DataSet: TDataSet);
+begin
+  Ib_EnderecoEX.Value := '0';
+end;
+
+procedure Tdm.ib_fpgNewRecord(DataSet: TDataSet);
+begin
+  ib_fpgATIVO.Value := 'S';
+  ib_fpgEX.Value    := '0';
+end;
+
+procedure Tdm.ib_FuncionarioNewRecord(DataSet: TDataSet);
+begin
+  ib_FuncionarioEX.Value := '0';
+  ib_FuncionarioATIVO.Value := 'N';
+end;
+
+procedure Tdm.ib_grupoNewRecord(DataSet: TDataSet);
+begin
+  ib_grupoEX.Value := '0';
+  ib_grupoATIVO.Value := 'S';
+end;
+
+procedure Tdm.ib_marcaNewRecord(DataSet: TDataSet);
+begin
+  ib_marcaATIVO.Value := 'S';
+  ib_marcaEX.Value    := '0';
+end;
+
+end.

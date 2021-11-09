@@ -1,0 +1,40 @@
+unit uCadFormaPgt;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadForm, Data.DB, System.ImageList,
+  Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Buttons, Vcl.ToolWin;
+
+type
+  TfmCadFormaPgt = class(TfmForm)
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btSairClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmCadFormaPgt: TfmCadFormaPgt;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfmCadFormaPgt.btSairClick(Sender: TObject);
+begin
+ // inherited;
+  FreeAndNil(fmCadFormaPgt);
+end;
+
+procedure TfmCadFormaPgt.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  Action := Cafree;
+end;
+
+end.

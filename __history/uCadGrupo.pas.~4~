@@ -1,0 +1,137 @@
+unit uCadGrupo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadForm, Data.DB, System.ImageList,
+  Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Buttons, Vcl.ToolWin, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TfmCadGrupo = class(TfmForm)
+    Label3: TLabel;
+    DBEdit1: TDBEdit;
+    Label4: TLabel;
+    DBEdit2: TDBEdit;
+    Label5: TLabel;
+    DBEdit3: TDBEdit;
+    DBCheckBox1: TDBCheckBox;
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const [Ref] Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBEdit3Exit(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btNovoClick(Sender: TObject);
+    procedure btEditarClick(Sender: TObject);
+    procedure btExcluirClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+    sTIPO : String;
+  public
+    { Public declarations }
+  end;
+
+var
+  fmCadGrupo: TfmCadGrupo;
+
+implementation
+
+{$R *.dfm}
+Uses udm;
+
+procedure TfmCadGrupo.btEditarClick(Sender: TObject);
+begin
+  inherited;
+   if dm.ib_grupo.State in [dsEdit] then
+    dm.ib_grupo.Edit;
+  STIPO := 'E';
+end;
+
+procedure TfmCadGrupo.btExcluirClick(Sender: TObject);
+begin
+  inherited;
+  if Application.MessageBox('Desejá excluir o registro selecionado?','Confirmação',mb_yesno+MB_ICONINFORMATION) = mryes then
+  begin
+    dm.qPes.Close;
+    dm.qPes.SQL.Clear;
+    dm.qPes.SQL.Add('update grupos set EX = 1 where ID = ' + QuotedStr(DM.ib_grupoID.Text));
+    dm.qPes.Open;
+    dm.IBTransaction1.Commit;
+  end;
+end;
+
+procedure TfmCadGrupo.btNovoClick(Sender: TObject);
+begin
+  inherited;
+  if dm.ib_grupo.State in [dsInsert] then
+    dm.ib_grupo.Open;
+  DBEdit2.SetFocus;
+  STipo := 'I';
+  dm.ib_grupo.Insert;
+end;
+
+procedure TfmCadGrupo.DBEdit3Exit(Sender: TObject);
+begin
+  inherited;
+  if STipo = 'I' then
+  begin
+    // Inseri o cadastro do cliente na tabela
+    if dm.ib_grupoDESCRICAO.Text = '' then
+    begin
+      Application.MessageBox('O campo descrição não preenchido!','Atenção');
+      DBEdit2.SetFocus;
+      exit;
+    end;
+
+    if dm.ib_grupo.State in [dsInsert, dsEdit] then
+      dm.ib_grupo.Post;
+    dm.IBTransaction1.Commit;
+    btSalvar.Enabled := True;
+    dm.IB_Cliente.Open;
+    if Application.MessageBox('Desejá inserir um novo registro?','Confirmação',mb_yesno+MB_ICONINFORMATION) = mryes then
+    begin
+      dm.ib_grupo.Open;
+      DBEdit2.SetFocus;
+      btNovoClick(Application);
+    end;
+  end;
+end;
+
+procedure TfmCadGrupo.DBGrid1DrawColumnCell(Sender: TObject;
+  const [Ref] Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  inherited;
+  // Mudar a cor da linha conforme o status do cliente
+  if (gdSelected in state) or (gdFocused in State) then
+    TDBGrid(Sender).Canvas.Brush.Color := clWindowText;
+
+  if (dm.ib_grupoATIVO.Value = 'S') or (dm.ib_grupoATIVO.Value = '') then
+  begin
+    DBGrid1.Canvas.Brush.Color := clWindow;
+    dbgrid1.Canvas.Font.Color := clWindowText;
+
+  end else begin
+    DBGrid1.Canvas.Brush.Color := $000000EA;
+    dbgrid1.Canvas.Font.Color := clWindowText;
+  end;
+
+  DBGrid1.Canvas.FillRect(Rect);
+  TDBGrid(Sender).DefaultDrawDataCell(rect,dbgrid1.Columns[datacol].Field,state);
+end;
+
+procedure TfmCadGrupo.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  dm.ib_grupo.Close;
+end;
+
+procedure TfmCadGrupo.FormCreate(Sender: TObject);
+begin
+  inherited;
+  sTipo := 'E';
+  dm.ib_grupo.Open;
+end;
+
+end.

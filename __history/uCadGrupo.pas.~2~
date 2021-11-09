@@ -1,0 +1,59 @@
+unit uCadGrupo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadForm, Data.DB, System.ImageList,
+  Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Buttons, Vcl.ToolWin, Vcl.Mask, Vcl.DBCtrls;
+
+type
+  TfmCadGrupo = class(TfmForm)
+    Label3: TLabel;
+    DBEdit1: TDBEdit;
+    Label4: TLabel;
+    DBEdit2: TDBEdit;
+    Label5: TLabel;
+    DBEdit3: TDBEdit;
+    DBCheckBox1: TDBCheckBox;
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const [Ref] Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmCadGrupo: TfmCadGrupo;
+
+implementation
+
+{$R *.dfm}
+Uses udm;
+
+procedure TfmCadGrupo.DBGrid1DrawColumnCell(Sender: TObject;
+  const [Ref] Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  inherited;
+  // Mudar a cor da linha conforme o status do cliente
+  if (gdSelected in state) or (gdFocused in State) then
+    TDBGrid(Sender).Canvas.Brush.Color := clWindowText;
+
+  if dm.ib_grupoATIVO.Value = 'S' then
+  begin
+    DBGrid1.Canvas.Brush.Color := clWindow;
+    dbgrid1.Canvas.Font.Color := clWindowText;
+
+  end else begin
+    DBGrid1.Canvas.Brush.Color := $000000EA;
+    dbgrid1.Canvas.Font.Color := clWindowText;
+  end;
+
+  DBGrid1.Canvas.FillRect(Rect);
+  TDBGrid(Sender).DefaultDrawDataCell(rect,dbgrid1.Columns[datacol].Field,state);
+end;
+
+end.

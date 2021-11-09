@@ -1,0 +1,140 @@
+unit uPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.Menus, System.Actions,
+  Vcl.ActnList, Vcl.ExtCtrls, Vcl.Buttons, Vcl.Imaging.pngimage;
+
+type
+  TfmPrincipal = class(TForm)
+    Panel1: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    Image1: TImage;
+    ActionList1: TActionList;
+    Action1: TAction;
+    Action2: TAction;
+    Action3: TAction;
+    Action4: TAction;
+    Action5: TAction;
+    Action6: TAction;
+    MainMenu1: TMainMenu;
+    Cadastros1: TMenuItem;
+    Produtos1: TMenuItem;
+    Grupo1: TMenuItem;
+    N1: TMenuItem;
+    Clientes1: TMenuItem;
+    Fornecedores1: TMenuItem;
+    Funcionarios1: TMenuItem;
+    Pedidos1: TMenuItem;
+    Pediso1: TMenuItem;
+    ConsultadeOramento1: TMenuItem;
+    N2: TMenuItem;
+    Venda1: TMenuItem;
+    ConsultadeVenda1: TMenuItem;
+    N3: TMenuItem;
+    Financeiro1: TMenuItem;
+    ContasReceber1: TMenuItem;
+    Contasapagar1: TMenuItem;
+    Consultas1: TMenuItem;
+    Consultaspedidos1: TMenuItem;
+    Configuraes1: TMenuItem;
+    Paramtros1: TMenuItem;
+    StatusBar1: TStatusBar;
+    SpeedButton5: TSpeedButton;
+    Action7: TAction;
+    Action8: TAction;
+    N4: TMenuItem;
+    Marca1: TMenuItem;
+    Parametrosdosistema1: TMenuItem;
+    procedure Produtos1Click(Sender: TObject);
+    procedure Funcionarios1Click(Sender: TObject);
+    procedure Action1Execute(Sender: TObject);
+    procedure Clientes1Click(Sender: TObject);
+    procedure Grupo1Click(Sender: TObject);
+    procedure Marca1Click(Sender: TObject);
+    procedure Fornecedores1Click(Sender: TObject);
+    procedure Parametrosdosistema1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmPrincipal: TfmPrincipal;
+
+implementation
+
+{$R *.dfm}
+uses uDm, uCadFornecedor, uCadFuncionario, uCadCliente, uCadGrupo, uCadMarca, uCadProduto, uCadEmpresa;
+
+procedure TfmPrincipal.Action1Execute(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TfmPrincipal.Clientes1Click(Sender: TObject);
+begin
+  // Chama o formulário de cadastro de cliente
+  if (fmCadCliente = nil) then
+    fmCadCliente := TfmCadCliente.Create(Application);
+  fmCadCliente.Show;
+end;
+
+procedure TfmPrincipal.Fornecedores1Click(Sender: TObject);
+begin
+  if (fmCadFornecedor = nil) then
+    fmCadFornecedor := TfmCadFornecedor.Create(Application);
+  fmCadFornecedor.Show;
+end;
+
+procedure TfmPrincipal.Funcionarios1Click(Sender: TObject);
+begin
+  // Chamando o formulário de cadastro de produtos
+  if (fmCadFuncionario = nil) then
+    fmCadFuncionario := TfmCadFuncionario.Create(Application);
+  fmCadFuncionario.Show;
+end;
+
+procedure TfmPrincipal.Grupo1Click(Sender: TObject);
+begin
+  // Chamando formulario de grupo
+  if (fmCadGrupo = Nil) then
+    fmCadGrupo := TfmCadGrupo.Create(Application);
+  fmCadGrupo.Show;
+end;
+
+procedure TfmPrincipal.Marca1Click(Sender: TObject);
+begin
+  // Chamando o formulario de Marcas
+  if (fmCadMarca = Nil) then
+    fmCadMarca := TfmCadMarca.Create(Application);
+  fmCadMarca.Show;
+end;
+
+procedure TfmPrincipal.Parametrosdosistema1Click(Sender: TObject);
+begin
+  // Chama o formulario de parâmetros
+  try
+   if (fmCadEmpresa = nil) then
+     fmCadEmpresa := TfmCadEmpresa.Create(Application);
+   fmCadEmpresa.Show;
+  finally
+    fmCadEmpresa.Release;
+  end;
+end;
+
+procedure TfmPrincipal.Produtos1Click(Sender: TObject);
+begin
+ // Chamando o formulário de cadastro de produtos
+  if (fmCadProduto = nil) then
+    fmCadProduto := TfmCadProduto.Create(Application);
+  fmCadProduto.Show;
+end;
+
+end.

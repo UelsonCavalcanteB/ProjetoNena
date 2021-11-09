@@ -1,0 +1,184 @@
+unit uCadFuncionario;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadForm, Data.DB, System.Actions,
+  Vcl.ActnList, System.ImageList, Vcl.ImgList, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Buttons, Vcl.ToolWin,
+  Vcl.DBCtrls, Vcl.Mask, uCadEndereco;
+
+type
+  TfmCadFuncionario = class(TfmForm)
+    Label3: TLabel;
+    DBEdit1: TDBEdit;
+    Label4: TLabel;
+    DBEdit2: TDBEdit;
+    DBCheckBox1: TDBCheckBox;
+    Label5: TLabel;
+    DBEdit3: TDBEdit;
+    Label6: TLabel;
+    DBEdit4: TDBEdit;
+    Label7: TLabel;
+    DBEdit5: TDBEdit;
+    Label8: TLabel;
+    DBEdit6: TDBEdit;
+    Label9: TLabel;
+    DBEdit7: TDBEdit;
+    Label10: TLabel;
+    DBEdit8: TDBEdit;
+    Label11: TLabel;
+    DBEdit9: TDBEdit;
+    Label12: TLabel;
+    DBEdit10: TDBEdit;
+    Label13: TLabel;
+    DBEdit11: TDBEdit;
+    Label14: TLabel;
+    DBEdit12: TDBEdit;
+    Label19: TLabel;
+    DBEdit13: TDBEdit;
+    Label20: TLabel;
+    DBEdit14: TDBEdit;
+    Label21: TLabel;
+    DBEdit15: TDBEdit;
+    Label22: TLabel;
+    DBEdit16: TDBEdit;
+    Label23: TLabel;
+    DBEdit17: TDBEdit;
+    Panel1: TPanel;
+    Label24: TLabel;
+    DBEdit18: TDBEdit;
+    Label25: TLabel;
+    DBEdit19: TDBEdit;
+    Label26: TLabel;
+    Edit3: TEdit;
+    Label27: TLabel;
+    DBEdit20: TDBEdit;
+    Panel2: TPanel;
+    DBComboBox1: TDBComboBox;
+    Label28: TLabel;
+    frmEndereco1: TfrmEndereco;
+    procedure btNovoClick(Sender: TObject);
+    procedure btEditarClick(Sender: TObject);
+    procedure btExcluirClick(Sender: TObject);
+    procedure btSalvarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const [Ref] Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btSairClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmCadFuncionario: TfmCadFuncionario;
+
+implementation
+
+{$R *.dfm}
+uses udm;
+
+procedure TfmCadFuncionario.btEditarClick(Sender: TObject);
+begin
+  inherited;
+  if dm.ib_Funcionario.State in [dsEdit] then
+    dm.ib_Funcionario.Edit;
+
+end;
+
+procedure TfmCadFuncionario.btExcluirClick(Sender: TObject);
+begin
+  inherited;
+  if Application.MessageBox('Desejá excluir o registro selecionado?','Confirmação',mb_yesno+MB_ICONINFORMATION) = mryes then
+  begin
+    // mudar o ex do funcionário para 1
+    dm.qPes.Close;
+    DM.qPes.SQL.Clear;
+    dm.qPes.SQL.Add('update funcionario set EX = 1 where ID = '+ QuotedStr(dm.ib_FuncionarioID.Text));
+    dm.qPes.Open;
+    // Muda o endereço funcionário para 1
+    dm.qUp.Close;
+    dm.qUp.SQL.Clear;
+    dm.qUp.SQL.Add('update endereco set ex = 1 where idfuncionario = '+ QuotedStr(dm.ib_FuncionarioID.Text));
+    dm.qUp.Open;
+    dm.IBTransaction1.Commit;
+  end;
+end;
+
+procedure TfmCadFuncionario.btNovoClick(Sender: TObject);
+begin
+  inherited;
+  if dm.ib_funcionario.State in [dsInsert] then
+    dm.IB_Funcionario.Open;
+end;
+
+procedure TfmCadFuncionario.btSairClick(Sender: TObject);
+begin
+  inherited;
+  FreeAndNil(fmCadFuncionario);
+end;
+
+procedure TfmCadFuncionario.btSalvarClick(Sender: TObject);
+begin
+  inherited;
+  // realizando as verificações antes de Salvar
+  if dm.ib_FuncionarioNOME.Text = '' then
+  begin
+    Application.MessageBox('Campo nome do funcionário não preenchido!','Atenção');
+    DBEdit3.SetFocus;
+    exit;
+  end;
+  if dm.ib_FuncionarioCPF.Value = '' then
+  begin
+    Application.MessageBox('Campo CPF não preenchido','Atenção');
+    DBEdit4.SetFocus;
+    exit;
+  end;
+  if dm.ib_Funcionario.State in [dsInsert, dsedit] then
+    dm.ib_Funcionario.Post;
+  dm.IBTransaction1.Commit;
+
+end;
+
+procedure TfmCadFuncionario.DBGrid1DrawColumnCell(Sender: TObject;
+  const [Ref] Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  inherited;
+  // Mudar a cor da linha conforme o status do cliente
+  if (gdSelected in state) or (gdFocused in State) then
+    TDBGrid(Sender).Canvas.Brush.Color := clWindowText;
+
+ if dm.ib_FuncionarioATIVO.Value = 'N' then
+  begin
+    DBGrid1.Canvas.Brush.Color := $000000EA;//clWindow;
+    dbgrid1.Canvas.Font.Color := clWindowText;
+
+  end else begin
+    DBGrid1.Canvas.Brush.Color := clWindow;
+    dbgrid1.Canvas.Font.Color := clWindowText;
+  end;
+
+  DBGrid1.Canvas.FillRect(Rect);
+  TDBGrid(Sender).DefaultDrawDataCell(rect,dbgrid1.Columns[datacol].Field,state);
+end;
+
+procedure TfmCadFuncionario.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+ // inherited;
+  dm.ib_Funcionario.Close;
+  FreeAndNil(fmCadFuncionario);
+end;
+
+procedure TfmCadFuncionario.FormCreate(Sender: TObject);
+begin
+  inherited;
+  dm.ib_Funcionario.Open;
+end;
+
+end.

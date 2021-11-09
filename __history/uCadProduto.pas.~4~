@@ -1,0 +1,75 @@
+unit uCadProduto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadForm, Data.DB, System.ImageList,
+  Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Buttons, Vcl.ToolWin, Vcl.DBCtrls, Vcl.Mask;
+
+type
+  TfmCadProdut = class(TfmForm)
+    Label3: TLabel;
+    DBEdit1: TDBEdit;
+    Label4: TLabel;
+    DBEdit2: TDBEdit;
+    Label5: TLabel;
+    DBEdit3: TDBEdit;
+    Label6: TLabel;
+    DBEdit4: TDBEdit;
+    Label7: TLabel;
+    DBEdit5: TDBEdit;
+    Label8: TLabel;
+    DBComboBox1: TDBComboBox;
+    Edit1: TEdit;
+    Label10: TLabel;
+    DBComboBox2: TDBComboBox;
+    Edit2: TEdit;
+    Label11: TLabel;
+    DBComboBox3: TDBComboBox;
+    Edit3: TEdit;
+    Label12: TLabel;
+    DBEdit6: TDBEdit;
+    Label13: TLabel;
+    DBEdit7: TDBEdit;
+    Label14: TLabel;
+    DBEdit8: TDBEdit;
+    Label17: TLabel;
+    DBEdit9: TDBEdit;
+    Label18: TLabel;
+    DBEdit10: TDBEdit;
+    Label9: TLabel;
+    DBEdit11: TDBEdit;
+    Label19: TLabel;
+    DBEdit12: TDBEdit;
+    Label20: TLabel;
+    DBEdit13: TDBEdit;
+    Label21: TLabel;
+    DBEdit14: TDBEdit;
+    Label22: TLabel;
+    DBEdit15: TDBEdit;
+    Label23: TLabel;
+    DBEdit16: TDBEdit;
+    Label24: TLabel;
+    DBEdit17: TDBEdit;
+    Label25: TLabel;
+    DBEdit18: TDBEdit;
+    Label26: TLabel;
+    DBComboBox4: TDBComboBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmCadProdut: TfmCadProdut;
+
+implementation
+
+{$R *.dfm}
+
+uses udm;
+
+end.

@@ -1,0 +1,26 @@
+unit uCadGrupo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadForm, Data.DB, System.ImageList,
+  Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Buttons, Vcl.ToolWin;
+
+type
+  TfmForm1 = class(TfmForm)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmForm1: TfmForm1;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,97 @@
+unit uCadFornecedor;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uCadForm, Data.DB, System.ImageList,
+  Vcl.ImgList, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.StdCtrls, Vcl.ExtCtrls,
+  Vcl.Buttons, Vcl.ToolWin, Vcl.DBCtrls, Vcl.Mask;
+
+type
+  TfmCadFornecedor = class(TfmForm)
+    Label3: TLabel;
+    DBEdit1: TDBEdit;
+    DataSource1: TDataSource;
+    Label4: TLabel;
+    DBEdit2: TDBEdit;
+    DBCheckBox1: TDBCheckBox;
+    Label5: TLabel;
+    DBEdit3: TDBEdit;
+    Label6: TLabel;
+    DBEdit4: TDBEdit;
+    Label7: TLabel;
+    DBEdit5: TDBEdit;
+    Label8: TLabel;
+    DBEdit6: TDBEdit;
+    Label9: TLabel;
+    DBEdit7: TDBEdit;
+    SpeedButton2: TSpeedButton;
+    Label10: TLabel;
+    DBEdit8: TDBEdit;
+    Label11: TLabel;
+    DBEdit9: TDBEdit;
+    Label12: TLabel;
+    DBEdit10: TDBEdit;
+    Label13: TLabel;
+    DBEdit11: TDBEdit;
+    Label19: TLabel;
+    DBEdit12: TDBEdit;
+    Label20: TLabel;
+    DBEdit13: TDBEdit;
+    Label21: TLabel;
+    DBEdit14: TDBEdit;
+    Label22: TLabel;
+    DBEdit15: TDBEdit;
+    Label23: TLabel;
+    DBEdit16: TDBEdit;
+    Label24: TLabel;
+    DBEdit17: TDBEdit;
+    Label14: TLabel;
+    DBEdit18: TDBEdit;
+    Label17: TLabel;
+    DBEdit19: TDBEdit;
+    Label18: TLabel;
+    DBEdit20: TDBEdit;
+    DBMemo1: TDBMemo;
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const [Ref] Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  fmCadFornecedor: TfmCadFornecedor;
+
+implementation
+
+{$R *.dfm}
+
+uses uDm;
+
+procedure TfmCadFornecedor.DBGrid1DrawColumnCell(Sender: TObject;
+  const [Ref] Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  inherited;
+  // Mudar a cor da linha conforme o status do cliente
+  if (gdSelected in state) or (gdFocused in State) then
+    TDBGrid(Sender).Canvas.Brush.Color := clWindowText;
+
+  if (dm.ib_FornecedorATIVO.Value = 'S') or (dm.ib_FornecedorATIVO.Value = '') then
+  begin
+    DBGrid1.Canvas.Brush.Color := clWindow;
+    dbgrid1.Canvas.Font.Color := clWindowText;
+
+  end else begin
+    DBGrid1.Canvas.Brush.Color := $000000EA;
+    dbgrid1.Canvas.Font.Color := clWindowText;
+  end;
+
+  DBGrid1.Canvas.FillRect(Rect);
+  TDBGrid(Sender).DefaultDrawDataCell(rect,dbgrid1.Columns[datacol].Field,state);
+end;
+
+end.
